@@ -2,7 +2,7 @@
 
 if __name__ == '__main__':
     print('coucou3')
-    #max = int(input("entrez max : "))
+    #max = int(input("entrez  max : "))
     max = 500
     for n in range(1,max+1) :
         sn = 1
