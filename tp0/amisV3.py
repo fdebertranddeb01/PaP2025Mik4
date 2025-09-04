@@ -15,7 +15,7 @@ def sommeDiv(n : int) -> int :
 if __name__ == '__main__':
     print('coucou3')
     #max = int(input("entrez  max : "))
-    max = 5000
+    max = 1300
     start = time.time()
     for n in range(1,max+1) :
         if sommeDiv(sommeDiv(n)) == n :
