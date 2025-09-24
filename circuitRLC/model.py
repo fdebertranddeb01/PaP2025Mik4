@@ -29,9 +29,14 @@ class Noeud :
         dy = self.py - y
         return math.sqrt(dx*dx + dy*dy)
 
+    def distanceNoeud(self,n2 : 'Noeud') -> float:
+        return self.distance(n2.px,n2.py)
+
 def test1() :
     n1 = Noeud(0,0)
     print(f"distance : {n1.distance(1,1)}")
+    n2 = Noeud(2,3)
+    print(f"distance {n1}-{n2} : {n1.distanceNoeud(n2)}")
 
 if __name__ == '__main__':
     test1()
