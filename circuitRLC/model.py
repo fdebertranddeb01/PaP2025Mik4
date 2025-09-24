@@ -1,0 +1,37 @@
+import math
+
+class Noeud :
+    def __init__(self,px : float,py : float):
+        self._px = px
+        self._py = py
+
+    @property
+    def px(self):
+        return self._px
+
+    @px.setter
+    def px(self, px: float):
+        self._px = px
+
+    @property
+    def py(self):
+        return self._px
+
+    @py.setter
+    def py(self, px: float):
+        self._px = px
+
+    def __str__(self):
+        return f"({self.px},{self.py})"
+
+    def distance(self,x : float,y : float) -> float:
+        dx = self.px - x
+        dy = self.py - y
+        return math.sqrt(dx*dx + dy*dy)
+
+def test1() :
+    n1 = Noeud(0,0)
+    print(f"distance : {n1.distance(1,1)}")
+
+if __name__ == '__main__':
+    test1()
