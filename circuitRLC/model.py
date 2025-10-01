@@ -112,6 +112,39 @@ class Condensateur(Composant) :
     def __str__(self):
         return f"[Condensateur : {self.capacite*1000000} microF ; de {self.ndep} vers {self.narr}]"
 
+class Circuit:
+    def __init__(self):
+        self._noeuds = []
+        self._compos = []
+
+    @property
+    def noeuds(self):
+        return self._noeuds
+
+    @property
+    def compos(self):
+        return self._compos
+
+    def add_noeud(self,n : 'Noeud') -> None :
+        self._noeuds.append(n)
+
+    def add_compo(self,c : 'Composant') -> None:
+        if c.ndep not in self._noeuds :
+            raise Exception("compo avec noeud hors circuit")
+        if c.narr not in self._noeuds :
+            raise Exception("compo avec noeud hors circuit")
+        self._compos.append(c)
+
+    def positionNoeud(self,n : 'Noeud') -> int :
+        """ renvoie la position du noeud dans la liste des noeuds
+        raise un exception si le noeud n'est pas dans le circuit"""
+        return self._noeuds.index(n)
+
+    def positionCompo(self,c: 'Composant') -> int :
+        """ renvoie la position du composant dans la liste des composants
+        raise un exception si le composant n'est pas dans le circuit"""
+        return self._compos.index(c)
+
 
 def test2() :
     n0 = Noeud(0,0)
@@ -127,3 +160,4 @@ def test2() :
 if __name__ == '__main__':
     # test1()
     test2()
+    print([1,2,3].index(4))
