@@ -74,10 +74,23 @@ class Composant :
 
 
 class Generateur(Composant) :
-    pass
+    def __init__(self,ndep : 'Noeud',narr : 'Noeud',fem : float):
+        super().__init__(ndep,narr)
+        self._fem = fem
+
+    @property
+    def fem(self):
+        return self._fem
+
+    @fem.setter
+    def fem(self,fem : float):
+        self._fem = fem
+
+
 
 class Condensateur(Composant) :
-    def __init__(self,capacite : float):
+    def __init__(self,ndep : 'Noeud',narr : 'Noeud',capacite : float):
+        super().__init__(ndep,narr)
         if capacite < 0 :
             raise Exception("capacite négative : n'importe quoi !!")
         self._capacite = capacite
@@ -93,13 +106,17 @@ class Condensateur(Composant) :
         self._capacite = capacite
 
     def __str__(self):
-        return f"[Condensateur : {self.capacite*1000000} microF]"
+        return f"[Condensateur : {self.capacite*1000000} microF ; de {self.ndep} vers {self.narr}]"
 
 def test2() :
-    g1 = Generateur()
-    print(isinstance(g1,Composant))
-    o1 = Object()
-    print(isinstance(o1,Composant))
+    n0 = Noeud(0,0)
+    n1 = Noeud(1, 1)
+    n2 = Noeud(2,2)
+    c1 = Condensateur(n1,n2,10)
+    g1 = Generateur(n0,n1,220)
+    print(isinstance(c1,Composant))
+    print(c1)
+    print(g1)
 
 
 if __name__ == '__main__':
