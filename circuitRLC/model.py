@@ -86,6 +86,10 @@ class Generateur(Composant) :
     def fem(self,fem : float):
         self._fem = fem
 
+    def __str__(self):
+        return f"[Generateur : {self.fem} V ; de {self.ndep} vers {self.narr}]"
+
+
 
 
 class Condensateur(Composant) :
@@ -107,6 +111,7 @@ class Condensateur(Composant) :
 
     def __str__(self):
         return f"[Condensateur : {self.capacite*1000000} microF ; de {self.ndep} vers {self.narr}]"
+
 
 def test2() :
     n0 = Noeud(0,0)
