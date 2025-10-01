@@ -21,7 +21,14 @@ class BoiteACoucou(qtw.QFrame):
         layout.addLayout(lnom)
         self._ta_messages = qtw.QPlainTextEdit()
         layout.addWidget(self._ta_messages)
+        lboutons = qtw.QHBoxLayout()
+        self._b_coucou = qtw.QPushButton("coucou")
+        self._b_salut = qtw.QPushButton("salut")
+        lboutons.addWidget(self._b_coucou)
+        lboutons.addWidget(self._b_salut)
+        layout.addLayout(lboutons)
         self.setLayout(layout)
+
 
 
 
