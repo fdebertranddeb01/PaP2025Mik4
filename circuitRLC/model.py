@@ -7,6 +7,8 @@ class Noeud :
     def __init__(self,px : float,py : float):
         self._px = px
         self._py = py
+        self._compos_dep = []
+        self._compos_arr = []
 
     @property
     def px(self):
@@ -23,6 +25,20 @@ class Noeud :
     @py.setter
     def py(self, px: float):
         self._px = px
+
+    @property
+    def compos_dep(self):
+        return self._compos_dep
+
+    @property
+    def compos_arr(self):
+        return self._compos_arr
+
+    def ajoute_compo_dep(self,compo : 'Composant') -> None:
+        self._compos_dep.append(compo)
+
+    def ajoute_compo_arr(self,compo : 'Composant') -> None:
+        self._compos_arr.append(compo)
 
     def __str__(self):
         return f"({self.px},{self.py})"
@@ -42,7 +58,20 @@ def test1() :
     print(f"distance {n1}-{n2} : {n1.distance_noeud(n2)}")
 
 class Composant :
-    pass
+    def __init__(self,ndep : 'Noeud',narr : 'Noeud'):
+        self._ndep = ndep
+        self._narr = narr
+        ndep.ajoute_compo_dep(self)
+        narr.ajoute_compo_arr(self)
+
+    @property
+    def ndep(self):
+        return self._ndep
+
+    @property
+    def narr(self):
+        return self._narr
+
 
 class Generateur(Composant) :
     pass
