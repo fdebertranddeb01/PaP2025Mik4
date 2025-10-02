@@ -20,11 +20,11 @@ class Noeud :
 
     @property
     def py(self):
-        return self._px
+        return self._py
 
     @py.setter
-    def py(self, px: float):
-        self._px = px
+    def py(self, py: float):
+        self._py = py
 
     @property
     def compos_dep(self):
@@ -157,6 +157,23 @@ class Circuit:
         raise un exception si le composant n'est pas dans le circuit"""
         return self._compos.index(c)
 
+    @classmethod
+    def circuit_test(cls) -> 'Circuit':
+        n1 = Noeud(0, 0)
+        n2 = Noeud(0, 1)
+        n3 = Noeud(1, 1)
+        c1 = Generateur(n1, n2, 220)
+        c2 = Condensateur(n2, n3, 0.001)
+        c3 = Condensateur(n3, n1, 0.002)
+        c = Circuit()
+        c.add_noeud(n1)
+        c.add_noeud(n2)
+        c.add_noeud(n3)
+        c.add_compo(c1)
+        c.add_compo(c2)
+        c.add_compo(c3)
+        return c
+
 
 def test2() :
     n0 = Noeud(0,0)
@@ -168,23 +185,8 @@ def test2() :
     print(c1)
     print(g1)
 
-def circuit_test() -> 'Circuit':
-    n1 = Noeud(0,0)
-    n2 = Noeud(0,1)
-    n3 = Noeud(1,1)
-    c1 = Generateur(n1,n2,220)
-    c2 = Condensateur(n2,n3,0.001)
-    c3 = Condensateur(n3,n1,0.002)
-    c = Circuit()
-    c.add_noeud(n1)
-    c.add_noeud(n2)
-    c.add_noeud(n3)
-    c.add_compo(c1)
-    c.add_compo(c2)
-    c.add_compo(c3)
-    return c
 
 if __name__ == '__main__':
     # test1()
-    c = circuit_test()
+    c = Circuit.circuit_test()
     print(c)

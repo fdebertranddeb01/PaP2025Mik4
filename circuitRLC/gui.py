@@ -77,6 +77,7 @@ class CreationNoeud(qtw.QFrame) :
         y = self._edit.get_py()
         nn = Noeud(x,y)
         self._main.circuit.add_noeud(nn)
+        self._main.update_view()
 
 class AfficheText(qtw.QFrame) :
     def __init__(self,main : 'MainCircuit'):
@@ -89,6 +90,7 @@ class AfficheText(qtw.QFrame) :
 
     def updateView(self):
         txt = str(self._main.circuit)
+        self._message.setPlainText(txt)
 
 
 class MainCircuit(qtw.QFrame) :
@@ -101,6 +103,7 @@ class MainCircuit(qtw.QFrame) :
         self._message = AfficheText(self)
         layout.addWidget(self._message)
         self.setLayout(layout)
+        self.update_view()
 
     def update_view(self):
         """ doit mettre à jour toute l'interface lorsque le model a été modifié
@@ -114,7 +117,7 @@ class MainCircuit(qtw.QFrame) :
 
 def gogogo():
     app = qtw.QApplication()
-    circuit = Circuit()
+    circuit = Circuit.circuit_test()
     fen = MainCircuit(circuit)
     fen.show()
     app.exec()
