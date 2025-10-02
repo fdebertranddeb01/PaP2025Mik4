@@ -103,7 +103,7 @@ class MainCircuit(qtw.QFrame) :
         self.setLayout(layout)
 
     def update_view(self):
-        """ doit mettre à jour toute l'interface lorsque le model a été modifié
+        """ doit mettre à jour toute l'interface lorsque le modele a été modifié
         appelle souvent update_view des sous-composants"""
         self._message.updateView()
 
