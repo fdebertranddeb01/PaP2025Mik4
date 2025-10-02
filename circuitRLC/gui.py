@@ -53,6 +53,13 @@ class EditNoeud(qtw.QFrame) :
         layout.addLayout(ltext)
         self.setLayout(layout)
 
+    def get_px(self) -> float:
+        return float(self._tfPx.text())
+
+    def get_py(self) -> float:
+        return float(self._tfPy.text())
+
+
 class CreationNoeud(qtw.QFrame) :
     def __init__(self,main : 'MainCircuit'):
         super().__init__()
@@ -61,8 +68,28 @@ class CreationNoeud(qtw.QFrame) :
         self._edit = EditNoeud(self._main)
         layout.addWidget(self._edit)
         self._bcreer = qtw.QPushButton("Creer")
+        self._bcreer.clicked.connect(self.creation)
         layout.addWidget(self._bcreer)
         self.setLayout(layout)
+
+    def creation(self):
+        x = self._edit.get_px()
+        y = self._edit.get_py()
+        nn = Noeud(x,y)
+        self._main.circuit.add_noeud(nn)
+
+class AfficheText(qtw.QFrame) :
+    def __init__(self,main : 'MainCircuit'):
+        super().__init__()
+        self._main = main
+        layout = qtw.QVBoxLayout()
+        self._message = qtw.QPlainTextEdit()
+        layout.addWidget(self._message)
+        self.setLayout(layout)
+
+    def updateView(self):
+        txt = str(self._main.circuit)
+
 
 class MainCircuit(qtw.QFrame) :
     def __init__(self,circuit : 'Circuit'):
@@ -71,9 +98,15 @@ class MainCircuit(qtw.QFrame) :
         layout = qtw.QVBoxLayout()
         self._editN = CreationNoeud(self)
         layout.addWidget(self._editN)
-        self._message = qtw.QPlainTextEdit()
+        self._message = AfficheText(self)
         layout.addWidget(self._message)
         self.setLayout(layout)
+
+    def update_view(self):
+        """ doit mettre à jour toute l'interface lorsque le model a été modifié
+        appelle souvent update_view des sous-composants"""
+        self._message.updateView()
+
 
     @property
     def circuit(self):

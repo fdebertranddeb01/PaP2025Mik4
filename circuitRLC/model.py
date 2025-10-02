@@ -125,6 +125,18 @@ class Circuit:
     def compos(self):
         return self._compos
 
+    def __str__(self):
+        res = ""
+        res = res + "-------- Circuit RLC ------------\n"
+        res = res + "-------- Noeuds\n"
+        for n in self.noeuds :
+            res = res + str(n) + "\n"
+        res = res + "-------- Composants\n"
+        for c in self.compos :
+            res = res + str(c) + "\n"
+        return res
+
+
     def add_noeud(self,n : 'Noeud') -> None :
         self._noeuds.append(n)
 
@@ -156,8 +168,23 @@ def test2() :
     print(c1)
     print(g1)
 
+def circuit_test() -> 'Circuit':
+    n1 = Noeud(0,0)
+    n2 = Noeud(0,1)
+    n3 = Noeud(1,1)
+    c1 = Generateur(n1,n2,220)
+    c2 = Condensateur(n2,n3,0.001)
+    c3 = Condensateur(n3,n1,0.002)
+    c = Circuit()
+    c.add_noeud(n1)
+    c.add_noeud(n2)
+    c.add_noeud(n3)
+    c.add_compo(c1)
+    c.add_compo(c2)
+    c.add_compo(c3)
+    return c
 
 if __name__ == '__main__':
     # test1()
-    test2()
-    print([1,2,3].index(4))
+    c = circuit_test()
+    print(c)
