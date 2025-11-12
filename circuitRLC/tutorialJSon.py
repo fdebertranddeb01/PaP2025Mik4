@@ -3,7 +3,7 @@ import random
 import jsonpickle
 
 def testJson(obj) :
-    print(f"------ original object : ---------")
+    print(f"------ original object : ----------")
     print(f"type : {type(obj)}")
     print(obj)
     jobj = json.dumps(obj)
