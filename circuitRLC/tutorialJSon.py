@@ -1,6 +1,7 @@
 import json
 import random
 import jsonpickle
+from model import Noeud,Composant,Circuit
 
 def testJson(obj) :
     print(f"------ original object : -----------")
@@ -81,9 +82,18 @@ def testClassAvecJsonPickle() :
     c1 = ReferenceCirculaire1(c2)
     testAvecJsonPickle(c1)
 
+def testCompletSurCircuit() :
+    c1 = Circuit.circuit_test()
+    testAvecJsonPickle(c1)
+
 if __name__ == '__main__':
+    print("============ test dictionnaire avec package de base json ====================")
     testDict()
+    print("============ test classe avec package de base json ====================")
     testClassSimple(ClassSimple())
+    print("============ test classe dépendance récursive ==> problème avec package json de base ====================")
     testClassAvecDependanceCirculaire()
-    print("coucou")
+    print("============ test classe avec package jsonpickle ====================")
     testClassAvecJsonPickle()
+    print("============ test classe circuit avec package jsonpickle ====================")
+    testCompletSurCircuit()
