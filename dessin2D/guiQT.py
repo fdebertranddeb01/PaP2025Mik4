@@ -22,7 +22,7 @@ Created on 25 juin 2022
 
 import PySide6.QtWidgets as qtw
 import PySide6.QtGui as qtg
-from fr.insa.beuvron.projets.dessin2D.model import Groupe,Point,Segment
+from model import Groupe,Point,Segment
 
 
 class FrameAvecBordure(qtw.QFrame):
