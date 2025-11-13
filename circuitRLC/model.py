@@ -1,8 +1,5 @@
 import math
 
-from shiboken6.Shiboken import Object
-
-
 class Noeud :
     def __init__(self,px : float,py : float):
         self._px = px
