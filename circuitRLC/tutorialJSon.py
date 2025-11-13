@@ -28,10 +28,6 @@ class ClassSimple():
     def __str__(self):
         return f"[ClassSimple a={self._a} b= {self._b}]"
 
-class ClassSimple():
-    def __init__(self):
-        self._a = 10
-        self._b = "coucou"
 def testClassSimple(obj) :
     print("on peut utiliser simplement le package json pour sauvegarder les attributs d'une classe")
     print("en utilisant l'attribut spécial __dict__")
@@ -76,11 +72,20 @@ def testAvecJsonPickle(obj) :
     print(f"------ reload : ----------")
     print(f"type : {type(objAgain)}")
     print(objAgain)
+    return objAgain
 
 def testClassAvecJsonPickle() :
     c2 = ReferenceCirculaire2()
     c1 = ReferenceCirculaire1(c2)
     testAvecJsonPickle(c1)
+
+def testIdentite() :
+    c2 = ReferenceCirculaire2()
+    c1 = ReferenceCirculaire1(c2)
+    c1._c2again = c2
+    jc1 = testAvecJsonPickle(c1)
+    print("identite préservée : " + str(jc1._refToC2 is jc1._c2again))
+
 
 def testCompletSurCircuit() :
     c1 = Circuit.circuit_test()
@@ -91,9 +96,11 @@ if __name__ == '__main__':
     testDict()
     print("============ test classe avec package de base json ====================")
     testClassSimple(ClassSimple())
-    print("============ test classe dépendance récursive ==> problème avec package json de base ====================")
+    print("============ test classe dépendance circulaire ==> problème avec package json de base ====================")
     testClassAvecDependanceCirculaire()
-    print("============ test classe avec package jsonpickle ====================")
+    print("============ test classe dépendance circulaire avec package jsonpickle ====================")
     testClassAvecJsonPickle()
+    print("============ préservation de l'identité ====================")
+    testIdentite()
     print("============ test classe circuit avec package jsonpickle ====================")
     testCompletSurCircuit()
